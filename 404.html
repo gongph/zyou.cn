@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="知U智能机器人，微信聊天机器人，客服机器人，智能聊天机器人，智能客服机器人，机器人客服，在线聊天机器人">
+  <meta name="description" content="知U智能机器人，提供全智能服务模式。智能客服机器人轻松应对90%常见问题，快速响应问询，让用户告别排队等待，并为企业提供完整的多渠道智能机器人解决方案。">
+  <meta name="author" content="CHANGYOU">
+  <meta name="robots" content="index,follow">
+  <meta name="application-name" content="zyou.cn">
+  <link rel="shortcut icon" type="image/x-icon" href="/imgs/favicon.png">
+  <link rel="stylesheet" href="/css/reset_122877d.css">
+  <title>404 | 知U机器人</title>
+  <link rel="stylesheet" href="/css/global_13a28fe.css">
+  <link rel="stylesheet" href="/css/404_bd93649.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="tip">
+      <img class="image" src="/imgs/404.png" alt="知U机器人，404页面">
+      <div class="text">
+        <p><h1>抱歉！</h1></p>
+        <p>您访问的页面丢失了</p>
+      </div>
+    </div>
+    <h1 class="count-down">
+      <span>{{countDown}}</span> 秒后返回主页
+    </h1>
+  </div>
+  <script src="/assets/vue/2.5.16/vue.js"></script>
+  <script>
+    new Vue({
+      el: '.count-down',
+      data: {
+        countDown: 3
+      },
+      created: function () {
+        var self = this
+        var origin = window.location.origin
+        var timer = setInterval(function () {
+          var num = self.countDown
+          self.countDown = num - 1
+          if (num <= 1) {
+            clearInterval(timer)
+            window.location.href = origin
+          }
+        }, 1000)
+      }
+    })
+  </script>
+</body>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="知U智能机器人，微信聊天机器人，客服机器人，智能聊天机器人，智能客服机器人，机器人客服，在线聊天机器人">
+  <meta name="description" content="知U智能机器人，提供全智能服务模式。智能客服机器人轻松应对90%常见问题，快速响应问询，让用户告别排队等待，并为企业提供完整的多渠道智能机器人解决方案。">
+  <meta name="author" content="CHANGYOU">
+  <meta name="robots" content="index,follow">
+  <meta name="application-name" content="zyou.cn">
+  <link rel="shortcut icon" type="image/x-icon" href="/imgs/favicon.png">
+  <link rel="stylesheet" href="/css/reset_122877d.css">
+  <title>注册 | 知U机器人</title>
+  <link rel="stylesheet" href="./assets/element-ui/2.4.4/index.min.css">
+  <link rel="stylesheet" href="/css/zyou-icons_ebfad13.css">
+  <link rel="stylesheet" href="/css/global_13a28fe.css">
+  <link rel="stylesheet" href="/css/register_07d9907.css">
+</head>
+<body>
+  <header class="navbar navbar--inner flex">
+  <div class="container navbar-inner">
+    <div class="navbar-brand"></div>
+    <div class="navbar-right">
+      <div class="navbar-nav">
+        <ul>
+          <li>
+            <a href="/">首页</a>
+            <span class="divider"></span>
+          </li>
+          <li>
+            <a href="product.html">产品</a>
+          </li>
+        </ul>
+      </div>
+      <div class="navbar-login">
+        <a href="//admin.zyou.cn/#/login">登录</a>
+        <a>/</a>
+        <a href="register.html">注册</a>
+      </div>
+    </div>
+  </div>
+</header>
+  <main class="main flex">
+    <div class="container">
+      <div id="app" class="register-wrapper flex">
+        <template v-if="regSuccessed">
+          <div class="reg-successed-wrapper">
+            <div class="success-img"></div>
+            <div class="success-text">
+              <h1>恭喜您，注册成功</h1>
+            </div>
+            <div class="success-jump-login">
+              <p><span>{{jumpCountDown}}</span>秒后跳转</p>
+              <p>如果没有跳转<a :href="loginUrl">点这里</a></p>
+            </div>
+          </div>
+        </template>
+        <template v-else>
+          <div class="title-wrapper flex">
+            <div class="title">
+              <h1>知U机器人</h1>
+            </div>
+            <div class="login">
+              <span>已有账号，</span>
+              <el-button type="text" @click="redirectLogin">立即登录</el-button>
+            </div>
+          </div>
+          <div class="register-wrapper--inner">
+            <el-form 
+              ref="ruleForm" 
+              :model="ruleForm" 
+              :rules="rules">
+              <el-form-item prop="mobile">
+                <el-input v-model="ruleForm.mobile" placeholder="请输入手机号" clearable></el-input>
+              </el-form-item>
+
+              <el-form-item prop="code">
+                <el-input v-model="ruleForm.code" placeholder="请输入验证码" clearable>
+                  <el-button slot="append" @click="getVerifyImg">
+                    <img :src="verifyImg" alt="验证码" width="98">
+                  </el-button>
+                </el-input>
+              </el-form-item>
+              <el-form-item prop="mobileCode">
+                <el-input v-model="ruleForm.mobileCode" placeholder="请输入手机验证码" clearable>
+                  <el-button 
+                    slot="append" 
+                    class="count-down" 
+                    @click="regSendMsgCaptcha" 
+                    :disabled="countDownable">
+                    {{countDown}}
+                  </el-button>
+                </el-input>
+              </el-form-item>
+              <el-form-item prop="password">
+                <el-input :type="inputType" v-model="ruleForm.password" placeholder="请设置密码">
+                  <i class="el-input__icon zyou-icon"
+                    :class="inputIcon"
+                    slot="suffix"
+                    @click="handleIconClick">
+                  </i>
+                </el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-checkbox @change="handleCheckbox">
+                  同意并阅读知U机器人
+                  <el-button type="text" @click="previewAgreement">服务平台协议</el-button>
+                </el-checkbox>
+              </el-form-item>
+              <el-form-item>
+                <el-button 
+                  type="primary" 
+                  class="submit-button" 
+                  :disabled="activated" 
+                  @click="submitForm('ruleForm')">
+                  立即注册
+                </el-button>
+              </el-form-item>
+            </el-form>
+          </div>
+        </template>
+      </div>
+    </div>
+  </main>
+  <script src="./assets/jsencrypt/jsencrypt.min.js"></script>
+  <script src="./assets/vue/2.5.16/vue.min.js"></script>
+  <script src="./assets/axios/0.18.0/axios.min.js"></script>
+  <script src="./assets/element-ui/2.4.4/index.min.js"></script>
+  <script src="/utils/common_cb7acbb.js"></script>
+  <script src="/js/site_b58fccc.js"></script>
+</body>

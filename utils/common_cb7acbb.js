@@ -1,0 +1,1 @@
+window.baseUrl="//api.zyou.cn",window.loginUrl="//admin.zyou.cn/#/login";
