@@ -8,135 +8,135 @@
   <meta name="robots" content="index,follow">
   <meta name="application-name" content="zyou.cn">
   <link rel="shortcut icon" type="image/x-icon" href="/imgs/favicon.png">
-  <link rel="stylesheet" href="/css/reset_122877d.css">
+  <link rel="stylesheet" href="/css/normalize_7054b43.css">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
   <title>找回密码 | 知U机器人</title>
-  <link rel="stylesheet" href="./assets/element-ui/2.4.3/index.min.css">
+  <link rel="stylesheet" href="./assets/element-ui/2.4.4/index.min.css">
   <link rel="stylesheet" href="/css/zyou-icons_ebfad13.css">
-  <link rel="stylesheet" href="/css/global_13a28fe.css">
-  <link rel="stylesheet" href="/css/resetpwd_079f45b.css">
+  <link rel="stylesheet" href="/css/global_96d97fb.css">
+  <link rel="stylesheet" href="/css/resetpwd_6b7a9eb.css">
 </head>
 <body>
-  <header class="navbar navbar--inner flex">
-  <div class="container navbar-inner">
-    <div class="navbar-brand"></div>
+  <div class="navbar navbar-inner">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand"></a>
+    </div>
     <div class="navbar-right">
       <div class="navbar-nav">
         <ul>
           <li>
-            <a href="/">首页</a>
-            <span class="divider"></span>
+            <a href="/" class="actived">首页</a>
           </li>
           <li>
             <a href="product.html">产品</a>
           </li>
+          <li class="login">
+            <a href="//admin.zyou.cn/#/login">登录</a>
+            <a> / </a>
+            <a href="register.html">注册</a>
+          </li>
         </ul>
-      </div>
-      <div class="navbar-login">
-        <a href="//admin.zyou.cn/#/login">登录</a>
-        <a>/</a>
-        <a href="register.html">注册</a>
       </div>
     </div>
   </div>
-</header>
-  <main class="main flex">
+</div>
+  <div id="app" class="app-wrapper">
     <div class="container">
-      <div id="app" class="resetpwd-wrapper flex">
+      <div class="app-wrapper__inner">
         <template v-if="resetSuccessed">
-          <div class="reset-successed-wrapper">
-            <div class="success-img"></div>
-            <div class="success-text">
-              <h1>密码更改成功！</h1>
-            </div>
-            <div class="success-jump-login">
-              <p><span>{{jumpCountDown}}</span>秒后跳转</p>
-              <p>如果没有跳转<a :href="loginUrl">点这里</a></p>
-            </div>
+          <div class="reset-successed-wrapper centered">
+            <img src="/imgs/003.png" alt="重置密码成功">
+            <h1>密码更改成功！</h1>
+            <p><span>{{jumpCountDown}}</span> 秒后跳转</p>
+            <p class="jump">如果没有跳转<a :href="loginUrl">点这里</a></p>
           </div>
         </template>
         <template v-else>
-          <div class="resetpwd-wrapper--inner">
-            <div class="title-wrapper">
-              <el-steps 
-                :active="step" 
-                process-status="finish" 
-                finish-status="success" 
-                simple>
-                <el-step title="1. 输入绑定手机号" icon="el-icon-edit"></el-step>
-                <el-step title="2. 设置新密码" icon="el-icon-edit"></el-step>
-              </el-steps>
-            </div>
-            <div class="resetpwd-form">
-              <template v-if="step === 0">
-                <el-form 
-                  ref="ruleForm"
-                  :model="ruleForm"
-                  :rules="rules"
-                  :status-icon="true">
-                  <el-form-item prop="bindMobile">
-                    <el-input v-model="ruleForm.bindMobile" placeholder="请输入手机号"></el-input>
-                  </el-form-item>
-                  <el-form-item prop="code">
-                    <el-input v-model="ruleForm.code" placeholder="请输入验证码">
-                      <el-button slot="append" @click="getVerifyImg">
-                        <img :src="verifyImg" alt="验证码" width="98">
-                      </el-button>
-                    </el-input>
-                  </el-form-item>
-                  <el-form-item prop="mobileCode">
-                    <el-input v-model="ruleForm.mobileCode" placeholder="请输入手机验证码">
-                      <el-button 
-                        slot="append" 
-                        class="count-down" 
-                        @click="resetpwdSendMsgCaptcha" 
-                        :disabled="countDownable">
-                        {{countDown}}
-                      </el-button>
-                    </el-input>
-                  </el-form-item>
-                  <el-form-item>
-                    <el-button 
-                      type="primary" 
-                      class="submit-button" 
-                      @click="next('ruleForm')">
-                      下一步
+          <div class="title-wrapper">
+            <el-steps 
+              :active="step" 
+              process-status="finish" 
+              finish-status="success" 
+              simple>
+              <el-step title="1. 输入绑定手机号" icon="el-icon-edit"></el-step>
+              <el-step title="2. 设置新密码" icon="el-icon-edit"></el-step>
+            </el-steps>
+          </div>
+          <div class="resetpwd-form">
+            <template v-if="step === 0">
+              <el-form 
+                ref="ruleForm"
+                :model="ruleForm"
+                :rules="rules"
+                :status-icon="true">
+                <el-form-item prop="bindMobile">
+                  <el-input v-model="ruleForm.bindMobile" placeholder="请输入手机号"></el-input>
+                </el-form-item>
+                <el-form-item prop="code">
+                  <el-input v-model="ruleForm.code" placeholder="请输入验证码">
+                    <el-button slot="append" @click="getVerifyImg">
+                      <img :src="verifyImg" alt="验证码" width="98">
                     </el-button>
-                  </el-form-item>
-                </el-form>
-              </template>
-              <template v-else-if="step === 1">
-                <el-form 
-                  ref="newpwdForm"
-                  :model="newpwdForm"
-                  :rules="newpwdRule">
-                  <el-form-item prop="newpwd">
-                    <el-input :type="inputType" v-model="newpwdForm.newpwd" placeholder="请输入新密码">
-                      <i class="el-input__icon zyou-icon"
-                        :class="inputIcon"
-                        slot="suffix"
-                        @click="handleIconClick">
-                      </i>
-                    </el-input>
-                  </el-form-item>
-                  <el-form-item class="resetpwd-btn-wrapper">
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="mobileCode">
+                  <el-input v-model="ruleForm.mobileCode" placeholder="请输入手机验证码">
                     <el-button 
-                      type="primary" 
-                      class="submit-button" @click="submitResetpwdForm('newpwdForm')">
-                      确定
+                      slot="append" 
+                      class="count-down" 
+                      @click="resetpwdSendMsgCaptcha" 
+                      :disabled="countDownable">
+                      {{countDown}}
                     </el-button>
-                  </el-form-item>
-                </el-form>
-              </template>
-            </div>
+                  </el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button 
+                    type="primary" 
+                    class="submit-button" 
+                    @click="next('ruleForm')">
+                    下一步
+                  </el-button>
+                </el-form-item>
+              </el-form>
+            </template>
+            <template v-else-if="step === 1">
+              <el-form 
+                ref="newpwdForm"
+                :model="newpwdForm"
+                :rules="newpwdRule">
+                <el-form-item prop="newpwd">
+                  <el-input :type="inputType" v-model="newpwdForm.newpwd" placeholder="请输入新密码">
+                    <i class="el-input__icon zyou-icon"
+                      :class="inputIcon"
+                      slot="suffix"
+                      @click="handleIconClick">
+                    </i>
+                  </el-input>
+                </el-form-item>
+                <el-form-item class="resetpwd-btn-wrapper">
+                  <el-button 
+                    type="primary" 
+                    class="submit-button" @click="submitResetpwdForm('newpwdForm')">
+                    确定
+                  </el-button>
+                </el-form-item>
+              </el-form>
+            </template>
           </div>
         </template>
       </div>
     </div>
-  </main>
+  </div>
   <script src="./assets/jsencrypt/jsencrypt.min.js"></script>
   <script src="./assets/vue/2.5.16/vue.min.js"></script>
   <script src="./assets/axios/0.18.0/axios.min.js"></script>
   <script src="./assets/element-ui/2.4.4/index.min.js"></script>
   <script src="/utils/common_cb7acbb.js"></script>
-  <script src="/js/site_b58fccc.js"></script>
+  <script src="/js/site_b3356f5.js"></script>
 </body>
